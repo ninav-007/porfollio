@@ -2,105 +2,334 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ninav P S | Portfolio</title>
   
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    :root {
+      --bg-primary: #0B0F19;
+      --bg-secondary: #161B26;
+      --accent: #00D2C4;
+      --text-primary: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      scroll-behavior: smooth;
+      padding-top: 80px;
+    }
+
+    /* Navbar styling */
+    .navbar {
+      background-color: rgba(11, 15, 25, 0.9) !important;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .navbar-brand, .nav-link {
+      color: var(--text-primary) !important;
+    }
+    .nav-link:hover {
+      color: var(--accent) !important;
+    }
+
+    /* Clear Grid Separation Fixes */
+    .section {
+      position: relative;
+      display: block;
+      width: 100%;
+      clear: both;
+      padding: 90px 0;
+    }
+    .bg-dark-alt {
+      background-color: var(--bg-secondary);
+    }
+
+    /* Hero Layout */
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      max-width: 600px;
+      margin-bottom: 30px;
+    }
+
+    /* Profile Image Styling */
+    .hero-img {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid var(--accent);
+      box-shadow: 0 0 25px rgba(0, 210, 196, 0.25);
+    }
+    @media (max-width: 991px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero-img {
+        width: 220px;
+        height: 220px;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Dynamic Action Buttons */
+    .btn-custom-primary {
+      background-color: var(--accent);
+      color: var(--bg-primary);
+      font-weight: 600;
+      border: none;
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 6px;
+    }
+    .btn-custom-primary:hover {
+      background-color: #00b3a7;
+      transform: translateY(-2px);
+      color: var(--bg-primary);
+    }
+    .btn-custom-outline {
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 6px;
+    }
+    .btn-custom-outline:hover {
+      background-color: rgba(0, 210, 196, 0.1);
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* Premium Containers */
+    .card-custom {
+      background-color: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 25px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .bg-dark-alt .card-custom {
+      background-color: var(--bg-primary);
+    }
+    .card-custom:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0, 210, 196, 0.3);
+    }
+    .card-custom h5 {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+    .card-custom p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* Badges */
+    .tech-tag {
+      background-color: rgba(0, 210, 196, 0.1);
+      color: var(--accent);
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    /* Skills Configuration */
+    .table-skills {
+      color: var(--text-primary);
+    }
+    .table-skills td {
+      padding: 18px;
+      border-bottom: 1px solid var(--border-color);
+      background: transparent !important;
+      color: var(--text-primary) !important;
+    }
+
+    /* Contact Formatting */
+    input, textarea {
+      background-color: var(--bg-secondary) !important;
+      border: 1px solid var(--border-color) !important;
+      color: var(--text-primary) !important;
+      border-radius: 6px !important;
+      padding: 14px !important;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--accent) !important;
+      outline: none;
+      box-shadow: 0 0 0 0.25rem rgba(0, 210, 196, 0.25) !important;
+    }
+    
+    h2 {
+      font-weight: 700;
+      margin-bottom: 35px;
+      position: relative;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -10px;
+      width: 45px;
+      height: 3px;
+      background-color: var(--accent);
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
   <div class="container">
-    <a class="navbar-brand" href="#">MyPortfolio</a>
+    <a class="navbar-brand fw-bold" href="#home">Ninav<span>.</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
 
-<!-- Home -->
 <section id="home" class="section hero">
-  <h1>Hello, I'm Ninav 👋</h1>
-  <p>Frontend Developer | JavaScript | React</p>
-</section>
-
-<!-- About -->
-<section id="about" class="section container">
-  <h2>About Me</h2>
-  <p>I am a passionate developer learning modern JavaScript and React.</p>
-</section>
-
-<!-- Education -->
-<section id="education" class="section bg-light">
   <div class="container">
-    <h2>Education</h2>
-    <p>B.Tech – Cyber Security</p>
+    <div class="row align-items-center">
+      <div class="col-lg-7 order-2 order-lg-1 text-start">
+        <p class="text-uppercase tracking-wider mb-2" style="color: var(--accent); font-weight: 600; letter-spacing: 1px;">Welcome to my portfolio</p>
+        <h1>Hello, I'm <span>Ninav P S</span> 👋</h1>
+        <p class="mt-3">Cyber Security Engineering Student & Full-Stack Developer specialized in constructing secure, performant web applications with Python, Flask, and Modern JavaScript.</p>
+        <div class="d-flex gap-3 mt-4">
+          <a href="#projects" class="btn btn-custom-primary">View My Work</a>
+          <a href="c:\Users\ninav\Downloads\my_resume.pdf" download="Ninav_Resume.pdf" class="btn btn-custom-outline">Download Resume</a>
+        </div>
+      </div>
+      <div class="col-lg-5 order-1 order-lg-2 d-flex justify-content-center justify-content-lg-end mb-4 mb-lg-0">
+        <img src="c:\Users\ninav\Downloads\profile.jpg" alt="Ninav P S" class="hero-img">
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- Internships -->
-<section id="internships" class="section container">
-  <h2>Internships & Certifications</h2>
-  <ul>
-    <li>Frontend Internship – Mentor Academy</li>
-    <li>JavaScript Certification</li>
-  </ul>
-</section>
-
-<!-- Skills -->
-<section id="skills" class="section bg-light">
+<section id="about" class="section bg-dark-alt">
   <div class="container">
-    <h2>Skills</h2>
     <div class="row">
-      <div class="col">HTML</div>
-      <div class="col">CSS</div>
-      <div class="col">JavaScript</div>
-      <div class="col">Bootstrap</div>
-      <div class="col">React</div>
+      <div class="col-12">
+        <h2>About Me</h2>
+        <p class="mt-4">I am a B.Tech Cyber Security student who bridges the gap between secure engineering architectures and modern full-stack web development. With hands-on building experience using Python, Flask, and JavaScript, I focus on transforming intricate backend logic into optimized, seamless, and intuitive digital interfaces.</p>
+        <p>Driven by core proficiencies across system design, relational database models, and web application components, I approach software construction with an explicit security-first mindset. Whether collaborating on localized technical projects or building end-to-end layouts for freelance clients, my ultimate goal is deploying high-quality, maintainable code.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Services -->
-<section id="services" class="section container">
-  <h2>Services</h2>
-  <ul>
-    <li>Web Design</li>
-    <li>Frontend Development</li>
-    <li>UI Implementation</li>
-  </ul>
-</section>
-
-<!-- Projects -->
-<section id="projects" class="section bg-light">
+<section id="skills" class="section">
   <div class="container">
-    <h2>Projects</h2>
-    <div class="row g-3">
-
-      <!-- Weather App -->
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>Weather App</h5>
-          <p>Fetches real-time weather data</p>
-          <a href="https://github.com/ninav-007/Week3/blob/main/Day7/weather.js" target="_blank" class="btn btn-primary">View on GitHub</a>
+    <div class="row">
+      <div class="col-12">
+        <h2>Technical Skills</h2>
+        <div class="table-responsive mt-4">
+          <table class="table table-skills align-middle">
+            <tbody>
+              <tr>
+                <td class="fw-bold" style="width: 25%; color: var(--accent) !important;">Languages</td>
+                <td>Python, JavaScript (ES6+), C, SQL, HTML5, CSS3</td>
+              </tr>
+              <tr>
+                <td class="fw-bold" style="color: var(--accent) !important;">Frameworks & Tools</td>
+                <td>Flask, React, Bootstrap, MySQL, Git, GitHub</td>
+              </tr>
+              <tr>
+                <td class="fw-bold" style="color: var(--accent) !important;">Core Competencies</td>
+                <td>Full-Stack Web Development, Application Security, Data Structures & Relational Systems, UI/UX Implementation</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
+    </div>
+  </div>
+</section>
 
-      <!-- Todo App -->
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>To Do App</h5>
-          <p>Task manager using JavaScript</p>
-          <a href="https://github.com/ninav-007/Week2-day7---To-do-app" target="_blank" class="btn btn-primary">View on GitHub</a>
-        </div>
+<section id="experience" class="section bg-dark-alt">
+  <div class="container">
+    <div class="row g-4">
+      
+      <div class="col-lg-6 col-12">
+        <h2>Experience & Certifications</h2>
+        
+        <a href="c:\Users\ninav\Downloads\litmus7_certificate.pdf" target="_blank" style="text-decoration: none; display: block;">
+          <div class="card-custom mt-4" style="border-left: 3px solid var(--accent); cursor: pointer;">
+            <div class="d-flex justify-content-between align-items-start">
+              <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">Jan 2026</span>
+              <span class="badge bg-secondary" style="font-size: 0.65rem;">View Document 📄</span>
+            </div>
+            <h5 class="mt-1">Technical Trainee Intern</h5>
+            <p class="mb-2 text-white-50">Litmus7</p>
+            <p class="mb-0 text-muted">Gained fundamental industry-standard engineering exposure executing development flows in Python. Focused on aligning logic structures with rigorous professional source-code standards.</p>
+          </div>
+        </a>
+
+        <a href="c:\Users\ninav\Downloads\iot_workshop_certificate.pdf" target="_blank" style="text-decoration: none; display: block;">
+          <div class="card-custom mt-4" style="border-left: 3px solid var(--accent); cursor: pointer;">
+            <div class="d-flex justify-content-between align-items-start">
+              <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">Jan 2026</span>
+              <span class="badge bg-secondary" style="font-size: 0.65rem;">View Document 📄</span>
+            </div>
+            <h5 class="mt-1">IICT Workshop</h5>
+            <p class="mb-2 text-white-50">IT Workshop Certificate — Introduction to 5G and IoT (IICT GMBH)</p>
+            <p class="mb-0 text-muted">Gained operational system knowledge in the Internet of Things (IoT) environment.</p>
+          </div>
+        </a>
+
+
+            </div>
+            <h5 class="mt-1">Frontend Engineering Trainee</h5>
+            <p class="mb-2 text-white-50">Mentor Academy</p>
+            <p class="mb-0 text-muted">Completed intensive training constructing modular web landing layouts, managing state mechanisms, and implementing responsive designs using JavaScript.</p>
+          </div>
+        </a>
       </div>
 
-      <!-- Ecommerce Catalogue -->
-      <div class="col-md-4">
-        <div class="card p-3">
-          <h5>Ecommerce Catalogue</h5>
-          <p>Product listing app</p>
-          <a href="https://github.com/ninav-007/Ecommerce_catalogue" target="_blank" class="btn btn-primary">View on GitHub</a>
+      <div class="col-lg-6 col-12">
+        <h2>Education</h2>
+        <div class="card-custom mt-4">
+          <span style="color: var(--accent); font-size: 0.85rem; font-weight: 600;">2024 - Present</span>
+          <h5 class="mt-1">B.Tech in Cyber Security</h5>
+          <p class="mb-2 text-white-50">APJ Abdul Kalam Technological University (KTU)</p>
+          <p class="mb-0 text-muted">Currently pursuing structured core tracks in Computer Science, Database Architecture, Application Integrity, Operating Systems, and Advanced Networking Controls.</p>
         </div>
       </div>
 
@@ -108,25 +337,94 @@
   </div>
 </section>
 
-<!-- Contact -->
-<section id="contact" class="section container">
-  <h2>Contact Me</h2>
+<section id="projects" class="section">
+  <div class="container">
+    <h2>Featured Projects</h2>
+    <div class="row g-4 mt-2">
 
-<form action="https://formspree.io/f/mvzzgqvj" method="POST">
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card-custom d-flex flex-column h-100 justify-content-between">
+          <div>
+            <div class="d-flex justify-content-between align-items-start mb-2">
+              <h5>AI Chatbot Platform</h5>
+              <span class="badge bg-danger text-uppercase" style="font-size: 0.65rem;">Hackathon</span>
+            </div>
+            <p class="mb-3 text-muted">Collaborative 24-hour hackathon project delivering automated course guidance and administrative context parsing for academic enquiries. Programmed rapid SQL search sequences to assure fluid query lookups.</p>
+            <div class="mb-3">
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">Flask</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">REST API</span>
+            </div>
+          </div>
+          <a href="#" target="_blank" class="btn btn-sm btn-custom-outline w-100">View Source Repository</a>
+        </div>
+      </div>
 
-  <input type="text" name="name" placeholder="Your Name" required>
-  <input type="email" name="email" placeholder="Your Email" required>
-  <textarea name="message" placeholder="Your Message" required></textarea>
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card-custom d-flex flex-column h-100 justify-content-between">
+          <div>
+            <h5>E-Commerce Project Index</h5>
+            <p class="mt-2 mb-3 text-muted">Developed an interactive inventory listing application engineered around optimized data mutations and dynamic filtering matrices. Structured clean, modular frontend component structures.</p>
+            <div class="mb-3">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">HTML5</span>
+              <span class="tech-tag">CSS3</span>
+              <span class="tech-tag">Bootstrap</span>
+            </div>
+          </div>
+          <a href="https://github.com/ninav-007/Ecommerce_catalogue" target="_blank" class="btn btn-sm btn-custom-outline w-100">View on GitHub</a>
+        </div>
+      </div>
 
-  <button type="submit">Send Message</button>
+      <div class="col-lg-4 col-md-6 col-12">
+        <div class="card-custom d-flex flex-column h-100 justify-content-between">
+          <div>
+            <h5>Asynchronous Weather Feed</h5>
+            <p class="mt-2 mb-3 text-muted">Engineered a single-page weather interface processing async HTTP server requests to clean, parse, and render live global client metrics. Implemented client-side edge error management.</p>
+            <div class="mb-3">
+              <span class="tech-tag">JavaScript (ES6)</span>
+              <span class="tech-tag">Fetch API</span>
+              <span class="tech-tag">JSON Processing</span>
+            </div>
+          </div>
+          <a href="https://github.com/ninav-007/Week3/blob/main/Day7/weather.js" target="_blank" class="btn btn-sm btn-custom-outline w-100">View on GitHub</a>
+        </div>
+      </div>
 
-</form>
-
-  <p id="status"></p>
+    </div>
+  </div>
 </section>
 
-<!-- EmailJS -->
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-<script src="script.js"></script>
+<section id="contact" class="section bg-dark-alt">
+  <div class="container" style="max-width: 600px;">
+    <div class="text-center mb-4">
+      <h2>Get In Touch</h2>
+      <p style="color: var(--text-muted);">Have an internship opportunity, a freelance project, or just want to connect? Drop a message!</p>
+      
+      <div class="card-custom my-4 p-3 text-center d-inline-block w-100">
+        <p class="mb-2">📱 <strong>Phone:</strong> <a href="tel:+919074551323" style="color: var(--accent); text-decoration: none;">+91 90745 51323</a></p>
+        <p class="mb-0">📍 <strong>Location:</strong> Thrissur, Kerala, India</p>
+      </div>
+    </div>
+    
+    <form action="https://formspree.io/f/mvzzgqvj" method="POST" class="d-flex flex-column">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit" class="btn btn-custom-primary w-100 py-2 mt-2">Send Secure Message</button>
+    </form>
+    
+    <div class="text-center mt-4">
+      <p class="mb-0 small" style="color: var(--text-muted);">
+        Connect via <a href="https://github.com/ninav-007" target="_blank" style="color: var(--accent); text-decoration: none;">GitHub</a> 
+        | <a href="https://linkedin.com/in/ninav-p-s" target="_blank" style="color: var(--accent); text-decoration: none;">LinkedIn</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
